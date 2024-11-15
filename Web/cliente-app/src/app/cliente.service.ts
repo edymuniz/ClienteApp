@@ -8,13 +8,12 @@ import { environment } from '../environments/environment';
 })
 export class ClienteService {
 
-  //private apiUrl = `${environment.apiBaseUrl}/cliente`;
-  private apiUrl = 'https://localhost:44388/Cliente';
+  private apiUrl = `${environment.apiBaseUrl}/cliente`;
 
   constructor(private http: HttpClient) { }
 
   getClientes(): Observable<any> {
-    return this.http.get('https://localhost:44388/Cliente/all');
+    return this.http.get('https://localhost:44349/api/Cliente/all');
   }
 
   getClienteById(id: number): Observable<any> {
