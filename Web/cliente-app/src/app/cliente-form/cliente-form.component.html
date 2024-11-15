@@ -1,0 +1,27 @@
+<form (ngSubmit)="saveCliente()">
+  <div>
+    <label for="nomeEmpresa">Nome da Empresa</label>
+    <input 
+      id="nomeEmpresa" 
+      (input)="onNomeEmpresaChange($event)" 
+      name="nomeEmpresa" 
+      required />
+    <div *ngIf="nomeEmpresa?.length < 3 && nomeEmpresa?.touched">
+      Nome da empresa é obrigatório e deve ter pelo menos 3 caracteres.
+    </div>
+  </div>
+
+  <div>
+    <label for="porte">Porte</label>
+    <input 
+      id="porte" 
+      (input)="onPorteChange($event)" 
+      name="porte" 
+      required />
+    <div *ngIf="porte?.length < 2 && porte?.touched">
+      Porte é obrigatório e deve ter pelo menos 2 caracteres.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!isFormValid()">Salvar</button>
+</form>
