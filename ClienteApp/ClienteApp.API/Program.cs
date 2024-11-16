@@ -20,14 +20,14 @@ namespace ClienteApp.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
-            
+
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowLocalhost", policy =>
+                options.AddPolicy("AllowAll", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200") // Permite o frontend Angular
-                          .AllowAnyHeader()                  // Permite qualquer cabeçalho
-                          .AllowAnyMethod();                  // Permite qualquer método (GET, POST, etc.)
+                    policy.AllowAnyOrigin()  
+                          .AllowAnyHeader()  
+                          .AllowAnyMethod(); 
                 });
             });
 
@@ -80,7 +80,7 @@ namespace ClienteApp.API
 
             var app = builder.Build();
 
-            app.UseCors("AllowLocalhost");
+            app.UseCors("AllowAll");
 
             if (app.Environment.IsDevelopment())
             {

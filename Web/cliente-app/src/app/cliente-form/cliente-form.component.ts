@@ -22,21 +22,27 @@ export class ClienteFormComponent {
   isFormValid(): boolean {
     return this.nomeEmpresa.length >= 3 && this.porte.length >= 2;
   }
-
   
   saveCliente(): void {
     if (this.isFormValid()) {
       const cliente = this.createCliente();
-
+      console.log('Enviando cliente:', cliente); // Debug
+  
       this.clienteService.createCliente(cliente).subscribe({
-        next: () => this.router.navigate(['/clientes']),
-        error: () => this.handleError('Erro ao salvar o cliente.')
+        next: () => {
+          console.log('Cliente criado com sucesso!');
+          this.router.navigate(['/clientes']);
+        },
+        error: (err) => {
+          console.error('Erro ao salvar o cliente:', err); // Debug
+          this.handleError('Erro ao salvar o cliente.');
+        }
       });
     } else {
       this.handleError('Todos os campos são obrigatórios e devem ter o tamanho mínimo.');
     }
   }
-
+  
 
   private createCliente() {
     return {
@@ -44,7 +50,6 @@ export class ClienteFormComponent {
       porte: this.porte
     };
   }
-
   
   private handleError(message: string): void {
     this.errorMessage = message;
