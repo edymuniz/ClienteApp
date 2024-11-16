@@ -9,27 +9,36 @@ import { Router } from '@angular/router';
 })
 export class ClienteListaComponent implements OnInit {
 
-  clientes: any[] = [];
+  clientes: Array<{ id: number, nomeEmpresa: string, porte: string }> = []; 
 
   constructor(
     private clienteService: ClienteService,
     private router: Router 
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    console.log('ClienteListaComponent inicializado.');
     this.loadClientes();
   }
 
   loadClientes(): void {
-    this.clienteService.getClientes().subscribe((data: any) => {
-      this.clientes = data;
+    this.clienteService.getClientes().subscribe({
+      next: (data: any) => {
+        this.clientes = data;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar clientes:', err);
+      }
     });
   }
 
   deleteCliente(id: number): void {
-    this.clienteService.deleteCliente(id).subscribe(() => {
-      this.loadClientes();
-    });
+    if (confirm('Tem certeza de que deseja excluir este cliente?')) {
+      this.clienteService.deleteCliente(id).subscribe({
+        next: () => this.loadClientes(),
+        error: (err) => console.error('Erro ao excluir cliente:', err)
+      });
+    }
   }
 
   navigateToEdit(clienteId: number): void {

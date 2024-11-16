@@ -1,16 +1,25 @@
 <div>
-    <h2>Lista de Clientes</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Nome da Empresa</th>
-          <th>Porte</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
-    </table>
-  </div>
-  
+  <h2>Lista de Clientes</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome da Empresa</th>
+        <th>Porte</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.nomeEmpresa }}</td>
+        <td>{{ cliente.porte }}</td>
+        <td>
+          <button type="button" (click)="deleteCliente(cliente.id)">Excluir</button>
+          <button type="button" (click)="navigateToEdit(cliente.id)">Editar</button>
+        </td>
+      </tr>
+      <tr *ngIf="clientes.length === 0">
+        <td colspan="3">Nenhum cliente encontrado.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

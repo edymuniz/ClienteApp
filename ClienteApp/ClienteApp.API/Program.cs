@@ -20,6 +20,16 @@ namespace ClienteApp.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+            
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200") // Permite o frontend Angular
+                          .AllowAnyHeader()                  // Permite qualquer cabeçalho
+                          .AllowAnyMethod();                  // Permite qualquer método (GET, POST, etc.)
+                });
+            });
 
             // SQL Server
             builder.Services.AddDbContext<ClienteDbContext>(options =>
@@ -69,6 +79,8 @@ namespace ClienteApp.API
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseCors("AllowLocalhost");
 
             if (app.Environment.IsDevelopment())
             {
