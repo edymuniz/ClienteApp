@@ -59,7 +59,7 @@ namespace ClienteApp.API.Controllers
             try
             {
                 await _updateClienteApplication.AlterarClienteAsync(id, clienteRequest);
-                return Ok("Cliente atualizado com sucesso.");
+                return Ok(new { message = "Cliente atualizado com sucesso." });
             }
             catch (KeyNotFoundException ex)
             {
@@ -89,15 +89,15 @@ namespace ClienteApp.API.Controllers
 
             if (result == "Cliente não encontrada.")
             {
-                return NotFound(result);
+                return NotFound(new { message = result });
             }
 
             if (result.StartsWith("Erro ao remover o cliente"))
             {
-                return StatusCode(500, result);
+                return StatusCode(500, new { message = result });
             }
 
-            return Ok(result);
+            return Ok(new { message = result });
         }
     }
 }

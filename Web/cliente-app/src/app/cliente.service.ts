@@ -8,7 +8,9 @@ import { environment } from '../environments/environment';
 })
 export class ClienteService {
 
-  private apiUrl = `${environment.apiBaseUrl}/Cliente`;
+  //private apiUrl = `${environment.apiBaseUrl}/Cliente`;
+  private apiUrl = 'http://localhost:5272/api/Cliente';
+
 
   constructor(private http: HttpClient) { }
 
@@ -20,13 +22,13 @@ export class ClienteService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  createCliente(cliente: { nomeEmpresa: string; porte: string }): Observable<any> {
-    return this.http.post<any>('http://localhost:5272/api/Cliente', cliente);
-  }
-
-  // createCliente(cliente: any): Observable<any> {
-  //   return this.http.post('http://localhost:5272/api/Cliente', cliente);
+  // createCliente(cliente: { nomeEmpresa: string; porte: string }): Observable<any> {
+  //   return this.http.post<any>('http://localhost:5272/api/Cliente', cliente);
   // }
+
+  createCliente(cliente: any): Observable<any> {
+    return this.http.post('http://localhost:5272/api/Cliente', cliente);
+  }
 
   updateCliente(id: number, cliente: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, cliente);

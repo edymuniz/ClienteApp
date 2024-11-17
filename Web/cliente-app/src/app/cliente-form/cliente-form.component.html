@@ -1,12 +1,15 @@
-<form (ngSubmit)="saveCliente()">
+<form (ngSubmit)="saveCliente()" #clienteForm="ngForm">
   <div>
     <label for="nomeEmpresa">Nome da Empresa</label>
     <input 
       id="nomeEmpresa" 
-      (input)="onNomeEmpresaChange($event)" 
+      [(ngModel)]="nomeEmpresa" 
       name="nomeEmpresa" 
-      required />
-    <div *ngIf="nomeEmpresa?.length < 3 && nomeEmpresa?.touched">
+      #nomeEmpresaCtrl="ngModel" 
+      required 
+      minlength="3"
+    />
+    <div *ngIf="nomeEmpresaCtrl.invalid && nomeEmpresaCtrl.touched">
       Nome da empresa é obrigatório e deve ter pelo menos 3 caracteres.
     </div>
   </div>
@@ -15,13 +18,16 @@
     <label for="porte">Porte</label>
     <input 
       id="porte" 
-      (input)="onPorteChange($event)" 
+      [(ngModel)]="porte" 
       name="porte" 
-      required />
-    <div *ngIf="porte?.length < 2 && porte?.touched">
+      #porteCtrl="ngModel" 
+      required 
+      minlength="2"
+    />
+    <div *ngIf="porteCtrl.invalid && porteCtrl.touched">
       Porte é obrigatório e deve ter pelo menos 2 caracteres.
     </div>
   </div>
 
-  <button type="submit" [disabled]="!isFormValid()">Salvar</button>
+  <button type="submit" [disabled]="clienteForm.invalid">Salvar</button>
 </form>
