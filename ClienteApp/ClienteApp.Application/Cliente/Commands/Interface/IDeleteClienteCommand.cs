@@ -1,6 +1,6 @@
 ﻿namespace ClienteApp.Application.Cliente.Commands.Interface
 {
-    public interface IDeleteClienteService
+    public interface IDeleteClienteCommand
     {
         Task<string> ApagarClienteAsync(int id);
     }

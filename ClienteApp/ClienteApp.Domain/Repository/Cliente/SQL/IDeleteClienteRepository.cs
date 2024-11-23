@@ -1,6 +1,6 @@
 ﻿using ClienteApp.Domain.Cliente.Dto;
 
-namespace ClienteApp.Domain.Repository.Commands.Cliente
+namespace ClienteApp.Domain.Repository.Cliente.SQL
 {
     public interface IDeleteClienteRepository
     {

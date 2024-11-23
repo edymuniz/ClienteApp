@@ -2,8 +2,8 @@ using ClienteApp.Application.Cliente.Commands.Interface;
 using ClienteApp.Application.Cliente.Commands.Service;
 using ClienteApp.Application.Cliente.Queries.Interface;
 using ClienteApp.Application.Cliente.Queries.Service;
-using ClienteApp.Domain.Repository.Commands.Cliente;
-using ClienteApp.Domain.Repository.Queries.Cliente;
+using ClienteApp.Domain.Repository.Cliente.Adapter;
+using ClienteApp.Domain.Repository.Cliente.SQL;
 using ClienteApp.Infrastructure.Adapter.Cliente;
 using ClienteApp.Infrastructure.Data;
 using ClienteApp.Infrastructure.Repository.Cliente;
@@ -62,16 +62,21 @@ namespace ClienteApp.API
             builder.Services.AddAutoMapper(typeof(Program));
 
             // Services
-            builder.Services.AddScoped<IGetClienteService, GetClienteService>();
-            builder.Services.AddScoped<ICreateClienteService, CreateClienteService>();
-            builder.Services.AddScoped<IUpdateClienteService, UpdateClienteService>();
-            builder.Services.AddScoped<IDeleteClienteService, DeleteClienteService>();
+            builder.Services.AddScoped<IGetClienteQuery, GetClienteQuery>();
+            builder.Services.AddScoped<ICreateClienteCommand, CreateClienteCommand>();
+            builder.Services.AddScoped<IUpdateClienteCommand, UpdateClienteCommand>();
+            builder.Services.AddScoped<IDeleteClienteCommand, DeleteClienteCommand>();
 
             // Repositories
-            builder.Services.AddScoped<IGetClienteRepository, GetClienteRepository>();
+            builder.Services.AddScoped<IMongoGetClienteRepository, MongoGetClienteRepository>();
             builder.Services.AddScoped<ICreateClienteRepository, CreateClienteRepository>();
             builder.Services.AddScoped<IUpdateClienteRepository, UpdateClienteRepository>();
             builder.Services.AddScoped<IDeleteClienteRepository, DeleteClienteRepository>();
+
+            // Adapters
+            builder.Services.AddScoped<IMongoCreateClienteRepository, MongoCreateClienteRepository>();
+            builder.Services.AddScoped<IMongoDeleteClienteRepository, MongoDeleteClienteRepository>();
+            builder.Services.AddScoped<IMongoUpdateClienteRepository, MongoUpdateClienteRepository>();
 
             builder.Services.AddControllers();
 

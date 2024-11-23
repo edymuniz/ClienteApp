@@ -1,14 +1,14 @@
 ﻿using ClienteApp.Application.Cliente.Queries.Interface;
 using ClienteApp.Domain.Cliente.Dto;
-using ClienteApp.Domain.Repository.Queries.Cliente;
+using ClienteApp.Domain.Repository.Cliente.Adapter;
 
 namespace ClienteApp.Application.Cliente.Queries.Service
 {
-    public class GetClienteService : IGetClienteService
+    public class GetClienteQuery : IGetClienteQuery
     {
-        private readonly IGetClienteRepository _getClienteRepository;
+        private readonly IMongoGetClienteRepository _getClienteRepository;
 
-        public GetClienteService(IGetClienteRepository getClienteRepository)
+        public GetClienteQuery(IMongoGetClienteRepository getClienteRepository)
         {
             _getClienteRepository = getClienteRepository;
         }

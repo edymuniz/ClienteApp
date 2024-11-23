@@ -18,6 +18,7 @@ services:
       - app-network
     volumes:
       - mongo-data:/data/db
+    command: ["mongod", "--replSet", "rs0"]
 
 networks:
   app-network:

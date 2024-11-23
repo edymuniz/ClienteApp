@@ -2,7 +2,7 @@
 
 namespace ClienteApp.Application.Cliente.Queries.Interface
 {
-    public interface IGetClienteService
+    public interface IGetClienteQuery
     {
         Task<IEnumerable<Clientes>> GetAllAsync();
         Task<Clientes> GetByIdAsync(int id);

@@ -3,7 +3,7 @@ using ClienteApp.Domain.Cliente.Request;
 
 namespace ClienteApp.Application.Cliente.Commands.Interface
 {
-    public interface ICreateClienteService
+    public interface ICreateClienteCommand
     {
         Task<Clientes> SalvarClienteAsync(ClienteRequest clienteRequest);
     }
