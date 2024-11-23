@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 })
 export class ClienteListaComponent implements OnInit {
 
-  clientes: Array<{ id: number, nomeEmpresa: string, porte: string }> = []; 
+  clientes: Array<{ id: number, nomeEmpresa: string, porte: string }> = []; // Mantém o tipo para exibir na tela
 
   constructor(
     private clienteService: ClienteService,
-    private router: Router 
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -23,8 +23,12 @@ export class ClienteListaComponent implements OnInit {
 
   loadClientes(): void {
     this.clienteService.getClientes().subscribe({
-      next: (data: any) => {
-        this.clientes = data;
+      next: (response: any) => {
+        if (response.success && response.data) {
+          this.clientes = response.data; // Extrai os clientes diretamente da propriedade "data"
+        } else {
+          console.warn('Nenhum cliente encontrado ou resposta inválida.');
+        }
       },
       error: (err) => {
         console.error('Erro ao carregar clientes:', err);
@@ -35,7 +39,10 @@ export class ClienteListaComponent implements OnInit {
   deleteCliente(id: number): void {
     if (confirm('Tem certeza de que deseja excluir este cliente?')) {
       this.clienteService.deleteCliente(id).subscribe({
-        next: () => this.loadClientes(),
+        next: () => {
+          console.log(`Cliente com ID ${id} excluído com sucesso.`);
+          this.loadClientes();
+        },
         error: (err) => console.error('Erro ao excluir cliente:', err)
       });
     }

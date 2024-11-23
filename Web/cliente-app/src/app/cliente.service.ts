@@ -9,13 +9,13 @@ import { environment } from '../environments/environment';
 export class ClienteService {
 
   //private apiUrl = `${environment.apiBaseUrl}/Cliente`;
-  private apiUrl = 'http://localhost:5272/api/Cliente';
+  private apiUrl = 'http://localhost:5272/api/v1/Cliente';
 
 
   constructor(private http: HttpClient) { }
 
   getClientes(): Observable<any> {
-    return this.http.get('http://localhost:5272/api/Cliente/all');
+    return this.http.get('http://localhost:5272/api/v1/Cliente');
   }
 
   getClienteById(id: number): Observable<any> {
@@ -27,7 +27,7 @@ export class ClienteService {
   // }
 
   createCliente(cliente: any): Observable<any> {
-    return this.http.post('http://localhost:5272/api/Cliente', cliente);
+    return this.http.post('http://localhost:5272/api/v1/Cliente', cliente);
   }
 
   updateCliente(id: number, cliente: any): Observable<any> {

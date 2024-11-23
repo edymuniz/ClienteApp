@@ -1,5 +1,6 @@
 <div>
   <h2>Lista de Clientes</h2>
+
   <table>
     <thead>
       <tr>
@@ -9,16 +10,19 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Lista de clientes -->
       <tr *ngFor="let cliente of clientes">
         <td>{{ cliente.nomeEmpresa }}</td>
         <td>{{ cliente.porte }}</td>
         <td>
-          <button type="button" (click)="deleteCliente(cliente.id)">Excluir</button>
-          <button type="button" (click)="navigateToEdit(cliente.id)">Editar</button>
+          <button type="button" (click)="deleteCliente(cliente.id)" title="Excluir cliente">Excluir</button>
+          <button type="button" (click)="navigateToEdit(cliente.id)" title="Editar cliente">Editar</button>
         </td>
       </tr>
+      
+      <!-- Caso não existam clientes -->
       <tr *ngIf="clientes.length === 0">
-        <td colspan="3">Nenhum cliente encontrado.</td>
+        <td colspan="3" style="text-align: center;">Nenhum cliente encontrado.</td>
       </tr>
     </tbody>
   </table>
